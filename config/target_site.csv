@@ -1,0 +1,10 @@
+split,site_name,URL
+dev,CNN,https://www.cnn.com
+dev,Variety,https://variety.com
+test,TechCrunch,https://techcrunch.com
+test,Mongabay,https://news.mongabay.com
+test,Space.com,https://www.space.com
+test-noisy,Entertainment Weekly,https://ew.com
+test-noisy,The New York Times,https://www.nytimes.com
+test-noisy,MedicalNewsToday,https://www.medicalnewstoday.com
+test-noisy,Healthline,https://www.healthline.com

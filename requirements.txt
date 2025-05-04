@@ -1,0 +1,7 @@
+chardet
+openai
+tiktoken
+pandas
+beautifulsoup4
+python-magic
+scikit-learn
