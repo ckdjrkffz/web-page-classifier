@@ -166,9 +166,11 @@ def main():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--prediction_data_path", type=str)
-    parser.add_argument("--data_split", type=str, default="test")
-    parser.add_argument("--use_mix", action="store_true")
+    parser.add_argument("--prediction_data_path", type=str, help="Path to prediction results to be loaded")
+    parser.add_argument("--data_split", type=str, default="test", help="Data split to use", choices=["dev", "test"])
+    parser.add_argument("--use_mix", action="store_true", help=(
+        "If true, hybrid method that uses half of the pages specified prediction results and the other half for shallow-level pages that are not based on the prediction results as the starting points"
+    ))
 
     args = parser.parse_args()
 

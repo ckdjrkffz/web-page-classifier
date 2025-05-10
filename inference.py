@@ -89,16 +89,34 @@ def main():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--data_path", type=str)
-    parser.add_argument("--prediction_data_path", type=str)
-    parser.add_argument("--page_size", type=int, default=1000000000)
-    parser.add_argument("--site_size", type=int, default=100)
-    parser.add_argument("--max_thread", type=int, default=256)
-    parser.add_argument("--classification_method", type=str)
-    parser.add_argument("--llm_input_list", type=str, nargs="*")
-    parser.add_argument("--llm_input_main_text_length", type=int, default=500)
-    parser.add_argument("--generation_model_name", type=str, default="None")
-    parser.add_argument("--data_split", type=str, default="test")
+    parser.add_argument("--data_path", type=str, help="Path to dataset to be loaded")
+    parser.add_argument("--prediction_data_path", type=str, help="Path where prediction results are saved")
+    parser.add_argument("--page_size", type=int, default=1000000000, help="Number of pages to process per site")
+    parser.add_argument("--site_size", type=int, default=100, help="Max website size to process")
+    parser.add_argument("--max_thread", type=int, default=256, help="Max thread size")
+    parser.add_argument("--classification_method", type=str, help=(
+            "Classification method. Select from below: "
+            "all: Tread all pages as index pages",
+            "rule: Classifiy by rule-base (use title word count)",
+            "llm: Use LLM. The model is specified in --generation_model_name",
+            "gold: Use gold label",
+        ),
+        choices=["all", "rule", "llm", "gold"]
+    )
+    parser.add_argument("--llm_input_list", type=str, nargs="*", help=(
+            "If you use LLMs, please specify the input to the LLMs (multipled selection allowed)",
+            "title: Title of web pages",
+            "main_text: Body of the web pages"
+        ),
+        choices=["title", "main_text"]
+    )
+    parser.add_argument("--llm_input_main_text_length", type=int, default=500, help="Max length of web page body")
+    parser.add_argument("--generation_model_name", type=str, default="None", help=(
+            "Generation model name. Currently, supports gpt-4o-mini and gpt-4o"
+        ),
+        choices=["gpt-4o-mini", "gpt-4o"]
+    )
+    parser.add_argument("--data_split", type=str, default="test", help="Data split to use", choices=["dev", "test"])
 
     args = parser.parse_args()
 

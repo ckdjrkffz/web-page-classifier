@@ -26,7 +26,8 @@ python -u crawl.py \
 ```
 
 ### Crawl index page
-- crawl only index page, and collect contents page from it.
+
+Crawl only index page, and collect contents page from it.
 ```
 python -u crawl_index.py \
 --data_path ./data/page_json/data_sample \
@@ -42,13 +43,21 @@ python -u preprocess.py \
 
 ### Inference & Evaluate
 
-- Arguments:
-    - `--classification_method`: Page classification method. Options are below:
-        - all: Treat all pages as index pages
-        - rule: Classification by rule-based.
-        - llm: Classification by LLM (gpt-4o-mini or gpt-4o)
-    - `--generation_model_name`: If you use LLMs, please specify the model name here.
-    - `--llm_input_list`: If you use LLMs, please specify the input to the LLMs.
+The following are some examples. For details, refer to the help for each script argument.
+
+#### All Pages (not classify)
+
+```
+python -u inference.py \
+--data_path ./data/page_json/data_sample \
+--prediction_data_path ./data/prediction_json/data_sample_all \
+--data_split test \
+--classification_method all
+
+python -u evaluate.py \
+--prediction_data_path ./data/prediction_json/data_sample_all \
+--data_split test
+```
 
 #### Rule-Based
 
@@ -64,18 +73,32 @@ python -u evaluate.py \
 --data_split test
 ```
 
-#### GPT-4o (Input: Title + Body text)
+#### GPT-4o-mini (Input: Title)
 
 ```
 python -u inference.py \
 --data_path ./data/page_json/data_sample \
---prediction_data_path ./data/prediction_json/data_sample_gpt-4o-mini_title_main \
+--prediction_data_path ./data/prediction_json/data_sample_gpt-4o-mini_title \
+--data_split test \
+--classification_method llm --llm_input_list title --generation_model_name gpt-4o-mini
+
+python -u evaluate.py \
+--prediction_data_path ./data/prediction_json/data_sample_gpt-4o-mini_title \
+--data_split test
+```
+
+#### Hybrid of "All Pages" and GPT-4o (Input: Title + Body text)
+
+```
+python -u inference.py \
+--data_path ./data/page_json/data_sample \
+--prediction_data_path ./data/prediction_json/data_sample_gpt-4o_title_main \
 --data_split test \
 --classification_method llm --llm_input_list title main_text --generation_model_name gpt-4o
 
 python -u evaluate.py \
 --prediction_data_path ./data/prediction_json/data_sample_gpt-4o_title_main \
---data_split test
+--data_split test --use_mix
 ```
 
 ## Licence

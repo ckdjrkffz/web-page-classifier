@@ -44,7 +44,7 @@ def main():
 
     crawl_parallel_method = "thread"
     func_args = ()
-    crawl_max_workers = args.max_process
+    crawl_max_workers = args.max_thread
     page_list = \
         thread_process_crawl_index(site_list, func_args, executor_type=crawl_parallel_method, max_workers=crawl_max_workers)
     print()
@@ -62,10 +62,10 @@ def main():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--data_path", type=str, default=None)
-    parser.add_argument("--page_size", type=int, default=1000000000, help="Download index page size per site")
-    parser.add_argument("--disable_page_reget", action="store_true", help="Reuse already downloaded page")
-    parser.add_argument("--max_process", type=int, default=16)
+    parser.add_argument("--data_path", type=str, help="Path to dataset to be saved")
+    parser.add_argument("--page_size", type=int, default=1000000000, help="Number of pages to download per site")
+    parser.add_argument("--disable_page_reget", action="store_true", help="If true, skip already downloaded page")
+    parser.add_argument("--max_thread", type=int, default=16, help="Max thread size")
 
     args = parser.parse_args()
 

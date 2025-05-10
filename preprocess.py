@@ -200,10 +200,10 @@ def main():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--data_path", type=str, default=None)
-    parser.add_argument("--page_size", type=int, default=1000000000, help="Page size per site")
-    parser.add_argument("--site_size", type=int, default=100)
-    parser.add_argument("--max_process", type=int, default=8)
+    parser.add_argument("--data_path", type=str, help="Path to dataset")
+    parser.add_argument("--page_size", type=int, default=1000000000, help="Number of pages to process per site")
+    parser.add_argument("--site_size", type=int, default=100, help="Max website size to process")
+    parser.add_argument("--max_process", type=int, default=8, help="Max process size")
 
     args = parser.parse_args()
 
