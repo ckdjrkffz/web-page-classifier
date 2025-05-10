@@ -87,7 +87,7 @@ python -u evaluate.py \
 --data_split test
 ```
 
-#### Hybrid of "All Pages" and GPT-4o (Input: Title + Body text)
+#### Hybrid of GPT-4o (Input: Title + Body text) and "All Pages"
 
 ```
 python -u inference.py \
