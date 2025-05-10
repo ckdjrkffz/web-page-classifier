@@ -1,9 +1,7 @@
 import time
 import os
-from glob import glob
 import traceback
 import subprocess
-import re
 
 
 class Downloader():
@@ -15,9 +13,7 @@ class Downloader():
         self.save_folder = f'{self.data_raw_folder}/{self.site_save_folder}'
         os.makedirs(self.save_folder, exist_ok=True)
 
-        self.path_set = set()
-        for path in glob(f"{self.data_raw_folder}/{self.save_folder}/*"):
-            self.path_set.add(path)
+        self.path_set = set(os.listdir(self.save_folder))
         print(f"Exist file size of {self.site_save_folder} is {len(self.path_set)}")
 
         self.curl_command = "curl"
@@ -41,7 +37,7 @@ class Downloader():
         return byte_text
 
     # Download specified url and save to the "save_path"
-    def download(self, url, reget=False, not_save=False, crawl_delay=1, try_count=5):
+    def download(self, url, page_reget=False, not_save=False, crawl_delay=1, try_count=5):
 
         # Generate save path
         if len(url) > 220:
@@ -52,7 +48,7 @@ class Downloader():
             save_path = f'{self.save_folder}/{url_replaced}'
 
         # If already downloaded, load it.
-        if reget is False and save_path in self.path_set:
+        if page_reget is False and save_path in self.path_set:
             with open(save_path, "rb") as f:
                 byte_text = f.read()
         else:

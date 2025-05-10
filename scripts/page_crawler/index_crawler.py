@@ -19,7 +19,7 @@ class IndexCrawler(BaseCrawler):
         self.site_name = site_name
         self.root_url_list = root_url_list
 
-        self.reget = (args.disable_page_reget == False)
+        self.page_reget = (args.disable_page_reget is False)
         self.page_size = args.page_size
 
         self.target_root_url = \
@@ -62,12 +62,12 @@ class IndexCrawler(BaseCrawler):
 
         link_list = []
         for root_url in root_url_list:
-            byte_text, save_path = self.downloader.download(root_url, reget=self.reget)
+            byte_text, save_path = self.downloader.download(root_url, page_reget=self.page_reget)
             text = byte_text.decode()
             link_list += re.findall(rf"<loc>({top_page_url}/.*?)</loc>", text)
         link_list = link_list[0:self.page_size]
         for link_num, link in enumerate(link_list):
-            byte_text, save_path = self.downloader.download(link, reget=self.reget)
+            byte_text, save_path = self.downloader.download(link, page_reget=self.page_reget)
             text = byte_text.decode()
             content_link_list = re.findall(rf"<loc>({top_page_url}/.*?)</loc>", text)
             for content_link in content_link_list:
@@ -94,7 +94,7 @@ class IndexCrawler(BaseCrawler):
 
         link_list = [f"https://techcrunch.com/latest/page/{i}/" for i in range(1, 13380+1)][0:self.page_size]
         for link_num, link in enumerate(link_list):
-            byte_text, save_path = self.downloader.download(link, reget=self.reget)
+            byte_text, save_path = self.downloader.download(link, page_reget=self.page_reget)
             text = byte_text.decode()
 
             soup = BeautifulSoup(text, "html.parser")
@@ -123,7 +123,7 @@ class IndexCrawler(BaseCrawler):
 
         link_list = [f"https://news.mongabay.com/list/2024/page/{i}/" for i in range(1, 790+1)][0:self.page_size]
         for link_num, link in enumerate(link_list):
-            byte_text, _ = self.downloader.download(link, reget=self.reget)
+            byte_text, _ = self.downloader.download(link, page_reget=self.page_reget)
             text = byte_text.decode()
 
             soup = BeautifulSoup(text, "html.parser")
@@ -156,7 +156,7 @@ class IndexCrawler(BaseCrawler):
             for year, month in list(itertools.product(range(1999, 2024+1), range(1, 12+1)))
         ][0:self.page_size]
         for link_num, link in enumerate(link_list):
-            byte_text, save_path = self.downloader.download(link, reget=self.reget)
+            byte_text, save_path = self.downloader.download(link, page_reget=self.page_reget)
             text = byte_text.decode()
             soup = BeautifulSoup(text, "html.parser")
             content_link_list = [element.find("a", href=True).get("href") for element in soup.find_all("li", attrs={"class": "day-article"})]
@@ -184,7 +184,7 @@ class IndexCrawler(BaseCrawler):
 
         link_list = [f"https://www.webmd.com/news/articles?pg={i}" for i in range(1, 70+1)][0:self.page_size]
         for link_num, link in enumerate(link_list):
-            byte_text, save_path = self.downloader.download(link, reget=self.reget)
+            byte_text, save_path = self.downloader.download(link, page_reget=self.page_reget)
             text = byte_text.decode()
 
             soup = BeautifulSoup(text, "html.parser")
@@ -214,7 +214,7 @@ class IndexCrawler(BaseCrawler):
 
         link_list = [f"https://www.scientificamerican.com/latest/?page={i}" for i in range(1, 50+1)][0:self.page_size]
         for link_num, link in enumerate(link_list):
-            byte_text, save_path = self.downloader.download(link, reget=self.reget)
+            byte_text, save_path = self.downloader.download(link, page_reget=self.page_reget)
             text = byte_text.decode()
 
             soup = BeautifulSoup(text, "html.parser")

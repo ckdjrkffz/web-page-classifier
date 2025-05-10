@@ -2,7 +2,7 @@
 
 This is code of our paper "Web Page Classification using LLMs for Crawling Support"
 
-[Paper Link (arXiv)](Coming Soon)
+Paper link will be available later.
 
 
 ## Setup

@@ -85,12 +85,14 @@ class GeneralCrawler(BaseCrawler):
                 continue
 
             if self.disable_page_reget:
-                reget = False
+                page_reget = False
             else:
-                reget = True
+                page_reget = True
 
             try:
-                byte_text, save_path = self.downloader.download(url, reget=reget, crawl_delay=self.crawl_delay)
+                byte_text, save_path = self.downloader.download(
+                    url, page_reget=page_reget, crawl_delay=self.crawl_delay
+                )
             except Exception as e:
                 if str(e).startswith("Connection failed"):
                     print(f"Cannot access to {url} because of connection error")
