@@ -1,18 +1,18 @@
 # Web Page Classification using LLMs for Crawling Support
 
-This is code of our paper "Web Page Classification using LLMs for Crawling Support"
+This repository contains the code for our paper "Web Page Classification using LLMs for Crawling Support"
 
-Paper link will be available later.
+[arxiv link](https://arxiv.org/abs/2505.06972)
 
 
 ## Setup
 
-- Python version is 3.10+ (The experiment was conducted using Python 3.10.5)
-- Instrall libraries by using requirements.txt.
+- Python Version: 3.10+ (The experiment was conducted using Python 3.10.5)
+- Install dependencies using requirements.txt.
 ```
 pip install -r requirements.txt
 ```
-- Copy `config/config_template.json` and generate `config/config.json`. Then, set the OpenAI API key in this file.
+- Copy `config/config_template.json` to `config/config.json`. Then, set the OpenAI API key in this file.
 
 ## How to use
 
@@ -45,7 +45,7 @@ python -u preprocess.py \
 
 The following are some examples. For details, refer to the help for each script argument.
 
-#### All Pages (not classify)
+#### All Pages (without classification)
 
 ```
 python -u inference.py \
@@ -87,7 +87,7 @@ python -u evaluate.py \
 --data_split test
 ```
 
-#### Hybrid of GPT-4o (Input: Title + Body text) and "All Pages"
+#### Hybrid method of GPT-4o (Input: Title + Body text) and "All Pages"
 
 ```
 python -u inference.py \
