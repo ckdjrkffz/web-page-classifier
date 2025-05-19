@@ -2,7 +2,7 @@
 
 This repository contains the code for our paper "Web Page Classification using LLMs for Crawling Support"
 
-[arxiv link](https://arxiv.org/abs/2505.06972)
+[arXiv link](https://arxiv.org/abs/2505.06972)
 
 
 ## Setup
